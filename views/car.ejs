@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title><%=car.carname%></title>
+
+    <!-- Bootstrap -->
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color:rgb(233, 232, 232);">
+ 
+<nav class="navbar navbar-expand-lg " style="background-color:white;box-shadow: 0 2px 2px -2px rgba(0,0,0,1); ">
+  
+    <i class="fa fa-car fa-3x" aria-hidden="true"></i>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a  class="nav-link" href="#">&nbsp;Home <span class="sr-only">(current)</span></a>
+      </li>
+      
+      <form class="form-inline my-2 my-lg-0 " style="margin-left: 430px;">
+        <input class="form-control mr-sm-2 text-center" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-primary " type="submit">Search</button>
+      </form>
+    </ul>
+    <a  class="nav-link" href="/login">&nbsp;Login <span class="sr-only">(current)</span></a>
+  </div>
+</nav>
+<div class="container">
+<div class="row mx-auto"   style="margin-top: 120px; background-color: white;">
+<div class=" col"  style="margin-top: 20px;">
+<p class="float-left"><img src="<%=car.carImg%>" alt="<%=car.carname%>" style="width:480px; height:auto"  >
+</div>
+    <div class=" col" style="margin-top: 20px;" >
+      <h4 >car info</h4> 
+<h6 >car name:<span> <%=car.carname %></span></h6> 
+<h6>car brand:<span> <%=car.carbrand %></span></h6> 
+<h6>car specs:</h6> 
+<h6><%=car.carspecs%></h6> 
+<h6>car price per day: <sapn ><%=car.carPricePerDay%>egp</span></h6>
+    <form method="POST" action="car">
+        <input type="text" name="carID" value="<%=car._id%>"style="display:none">
+    <label style="font-size:1em; font-weight: bold;" >rent now:</label>
+    <input  type="date"id="days" name="days" min="new Date()" onchange="test()">
+    <button class="btn btn-primary" type="submit">submit</button>
+    <br>
+    <h6>rented dayes:</h6>
+    <% rentedDays.forEach(function(day){ %>
+    <h6><%=day%></h6>
+     
+      <%})%>
+      <hr>
+      <h4> car owner info </h4>
+  <h6>  <span>  name: <%=user.firstname%> <%=user.firstname%></span> </h6>
+  <h6>  <span>  address: <%=user.address%> </span> </h6>
+  <h6>  <span>  phone number: <%=user.phonenumber%> </span> </h6>
+  <h6>  <span>  email: <%=user.email%> </span> </h6>
+</form>
+
+</div>
+</div>
+</div>
+</body>
+<script>
+    function test(){
+    let brr=document.getElementById("days");
+    let array="<%=rentedDays%>"+','
+    let arr=[]
+    let str=''
+    for(let j=0;j<array.length;j=j+1){
+     console.log()
+    if(array[j]===','){
+      arr.push(str)
+      str=''
+    }
+    else
+    str+=array[j]
+  }
+    console.log(arr)
+    if(arr.includes(brr.value)){
+    brr.setCustomValidity('not avalibale in this day');
+     brr.reportValidity();
+    }
+  
+    }
+    </script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>
